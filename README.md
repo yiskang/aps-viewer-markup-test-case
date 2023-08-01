@@ -6,12 +6,20 @@
 
 Test case of generating data string using `generateData()` of the `Autodesk.Viewing.MarkupsCore` extension.
 
-This sample will load the model you specified automatically with [Puppeteer](https://pptr.dev/), Node.js API for Google Chrome, load the `Autodesk.Viewing.MarkupsCore` extension, create two rectangle markups, call `generateData()` for markup data string, and then verify if any markup in the generated markup data string has no valid markup metadata.
+## Test Case
+
+This sample will do the following in the test:
+
+1. Load the model you specified automatically with [Puppeteer](https://pptr.dev/), Node.js API for Google Chrome.
+2. Load the `Autodesk.Viewing.MarkupsCore` extension.
+3. Create two rectangle markups using API provided by the `Autodesk.Viewing.MarkupsCore` extension.
+4. Call `generateData()` of the `Autodesk.Viewing.MarkupsCore` extension to generating markup data string (XML).
+5. Verify if any markup in the generated markup data string has no valid markup metadata by converting the data string from XML to JSON.
 
 ### Notes
 
 - This sample will run the test for 30 mins by default.
-- This sample use [xml-js](https://www.npmjs.com/package/xml-js) for converting XAML to JSON.
+- This sample uses [xml-js](https://www.npmjs.com/package/xml-js) for converting XAML to JSON.
 - If any invalid markup found in the generated markup data string (no markup metadata), it will report the finding in the console.
 - This sample will report remaining time in the console per 5 mins.
 

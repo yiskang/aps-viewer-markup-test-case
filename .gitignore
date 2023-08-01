@@ -82,3 +82,5 @@ typings/
 # Ignore all local history of files
 .history
 .ionide
+
+test.png

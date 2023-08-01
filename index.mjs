@@ -114,6 +114,12 @@ function delay(time) {
         await page.mouse.move(rect.x + 250 + 150, rect.y + 250 + 150);
         await page.mouse.up();
 
+        // saves screenshot in process.env.IMGPATH
+        // or defaults to test.png
+        await page.screenshot({
+            path: process.env.IMGPATH || 'test.png'
+        });
+
         console.log('Start testing `generateData()` ...');
         let startTime = Date.now();
         let testPeriod = 30 * 60 * 1000; //!<<< 30 mins, Change this value to extend the test time
@@ -148,32 +154,25 @@ function delay(time) {
 
             if (markupJson?.elements && markupJson?.elements.length > 0) {
                 let markupDataRoot = markupJson?.elements[0];
-                let isAllMarkupsHaveMetadata = markupDataRoot.elements.filter(n => n.name === 'g').every(g => g.elements.find(n => n.name == 'metadata'));
+                let areAllMarkupsHaveMetadata = markupDataRoot.elements.filter(n => n.name === 'g').every(g => g.elements.find(n => n.name == 'metadata'));
 
-                if (isAllMarkupsHaveMetadata) {
+                if (areAllMarkupsHaveMetadata) {
                     //console.log(`Is valid: ${isAllMarkupsHaveMetadata}, count: ${count}`);
                 } else {
-                    console.error(`Is valid: ${isAllMarkupsHaveMetadata}, count: ${count}, ${markupXml}`);
+                    console.error(`Is valid: ${areAllMarkupsHaveMetadata}, count: ${count}, ${markupXml}`);
                 }
             }
 
             if (count === 1)
                 reportTestProgressByBase();
 
-            await delay(4000);
+            await delay(5 * 1000);
         }
-
-        // saves screenshot in process.env.IMGPATH
-        // or defaults to test.png
-        // await page.screenshot({
-        //     path: process.env.IMGPATH || 'test.png'
-        // });
 
         console.log('Test successful :)');
     } catch (ex) {
         console.log('Test failed :(');
         console.log(ex);
-
     } finally {
         await browser.close();
     }

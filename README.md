@@ -13,8 +13,25 @@ This sample will do the following in the test:
 1. Load the model you specified automatically with [Puppeteer](https://pptr.dev/), Node.js API for Google Chrome.
 2. Load the `Autodesk.Viewing.MarkupsCore` extension.
 3. Create two rectangle markups using API provided by the `Autodesk.Viewing.MarkupsCore` extension.
-4. Call `generateData()` of the `Autodesk.Viewing.MarkupsCore` extension to generating markup data string (XML).
-5. Verify if any markup in the generated markup data string has no valid markup metadata by converting the data string from XML to JSON.
+4. Take a snapshot of viewer screen and save it as `test.png` in the project folder.
+5. Call `generateData()` of the `Autodesk.Viewing.MarkupsCore` extension to generating markup data string (XML).
+6. Verify if any markup in the generated markup data string has no valid markup metadata by converting the data string from XML to JSON.
+
+Here is an example of console output from this sample:
+
+```bash
+[2023-08-01T09:02:16.372Z] Node.js version: v18.16.0
+[2023-08-01T09:02:19.905Z] Loading Model ...
+[2023-08-01T09:02:35.177Z] Loading MarkupCoreExt ...
+[2023-08-01T09:02:36.654Z] Drawing two markups ...
+[2023-08-01T09:02:36.778Z] Start testing `generateData()` ...
+[2023-08-01T09:02:36.783Z] Remaining time (mins): 60.00, Call `generateData()` count: 1
+[2023-08-01T09:05:00.002Z] Remaining time (mins): 57.61, Call `generateData()` count: 36
+[2023-08-01T09:10:00.003Z] Remaining time (mins): 52.61, Call `generateData()` count: 111
+[2023-08-01T09:15:00.032Z] Remaining time (mins): 47.61, Call `generateData()` count: 186
+
+##...
+```
 
 ### Notes
 

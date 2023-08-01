@@ -125,17 +125,21 @@ function delay(time) {
         let testPeriod = 30 * 60 * 1000; //!<<< 30 mins, Change this value to extend the test time
         let endTime = new Date(startTime + testPeriod);
         let count = 0;
+        let continueReportProgress = true;
+        let reportTestProgressTimerHandle = null;
 
         const REPORT_BASE_TIME = 5 * 60 * 1000; //!<<< Report remaining time per 5 mins.
         function reportTestProgressByBase() {
-            const msToNextRounded = REPORT_BASE_TIME - (Date.now() % REPORT_BASE_TIME);
-
             let minutesRemained = (endTime - Date.now()) / 1000 / 60;
             console.log(`Remaining time (mins): ${minutesRemained.toFixed(2)}, Call \`generateData()\` count: ${count}`);
 
-            setTimeout(() => {
-                reportTestProgressByBase();
-            }, msToNextRounded);
+            if (continueReportProgress) {
+                const msToNextRounded = REPORT_BASE_TIME - (Date.now() % REPORT_BASE_TIME);
+                reportTestProgressTimerHandle = setTimeout(() => {
+                    reportTestProgressByBase();
+                }, msToNextRounded);
+            }
+
         }
 
         //for (let i = 0; i < 10; i++) {
@@ -169,11 +173,17 @@ function delay(time) {
             await delay(5 * 1000);
         }
 
-        console.log('Test successful :)');
+        continueReportProgress = false;
+        if (reportTestProgressTimerHandle)
+            clearTimeout(reportTestProgressTimerHandle);
+
+        console.log(`Test successful :), Call \`generateData()\` count: ${count}`);
     } catch (ex) {
         console.log('Test failed :(');
         console.log(ex);
     } finally {
+        console.log('Closing Test Browser');
         await browser.close();
+        console.log('Test Browser Closed');
     }
 })();

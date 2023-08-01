@@ -1,0 +1,17 @@
+{
+  "name": "aps-viewer-markup-test-case",
+  "version": "1.0.0",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "author": "Eason Kang <eason.kang@autodesk.com>",
+  "license": "MIT",
+  "dependencies": {
+    "forge-apis": "^0.9.6",
+    "log-timestamp": "^0.3.0",
+    "puppeteer": "^20.9.0",
+    "xml-js": "^1.6.11"
+  }
+}
